@@ -29,10 +29,31 @@ def generate_pairings(names: list[str]) -> list[tuple[str, str]]:
 
 
 def main():
-    # TODO: grab user input
-    # TODO: call generate_pairings() with the input
-    # TODO: pretty print the results
-    pass
+    print("Welcome to the Secret Santa generator!")
+    print("Input an empty name to end.\n")
+
+    names = []
+    inputting = True
+
+    while inputting:
+        name = input("Insert a name: ")
+        if name == "":
+            inputting = False
+        else:
+            names.append(name)
+
+    if len(names) < 2:
+        print("\nNot enough names inputted! Specify at least 2.")
+        return
+
+    pairings = generate_pairings(names)
+
+    max_name_length = max(map(lambda pair: len(pair[0]), pairings))
+
+    print("\nHere are the results:")
+    print(f"{'giver' : >{max_name_length}} --> receiver\n")
+    for giver, receiver in pairings:
+        print(f"{giver : >{max_name_length}} --> {receiver}")
 
 
 if __name__ == "__main__":
